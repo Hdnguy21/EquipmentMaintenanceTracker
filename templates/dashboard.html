@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexOps - Dashboard</title>
+    <!-- Favicon placeholder or styling -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚙️</text></svg>">
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <header class="top-navbar">
+        <div class="navbar-left">
+            <button id="sidebar-toggle" class="btn-hamburger" title="Toggle Sidebar">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+            <div class="logo-brand-area">
+                <span class="logo-text">NexOps</span>
+                <span class="logo-version">v3.0</span>
+            </div>
+        </div>
+        <div class="navbar-right">
+            <div class="user-profile">
+                <span class="user-name">Marcus Miller</span>
+                <div class="user-avatar">MM</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="app-body">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <nav class="nav-menu">
+                <li class="nav-item active">
+                    <a href="{{ url_for('dashboard') }}">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z" />
+                        </svg>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('index') }}">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        Log Issue
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('reports') }}">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        Reports
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('equipment_list') }}">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                        </svg>
+                        Equipment List
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('settings') }}">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                            <circle cx="12" cy="12" r="3" />
+                        </svg>
+                        Settings
+                    </a>
+                </li>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="system-status">
+                    <span class="status-dot"></span>
+                    <span>Factory Node: TX-H1</span>
+                </div>
+                <div>Server Time: <span id="server-time-clock">--:--:--</span></div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Alert Container for Success Notification from Redirects -->
+            <div class="alert-container" id="alert-container">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                <span>{{ message }}</span>
+                                <button class="alert-close" onclick="this.parentElement.remove()">&times;</button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+
+            <!-- Breadcrumbs -->
+            <div class="breadcrumbs">
+                <a href="{{ url_for('dashboard') }}">Home</a>
+                <span class="separator">/</span>
+                <span class="current">Dashboard</span>
+            </div>
+
+            <!-- Page Header -->
+            <header class="page-header">
+                <div>
+                    <h2 class="page-title">Operational Dashboard</h2>
+                    <p class="page-description">Real-time status tracking, fault distributions, and maintenance metrics.</p>
+                </div>
+                <div class="header-actions">
+                    <span class="header-datetime monospace-val" style="margin-right: 0.5rem; font-size: 0.8rem; color: var(--text-muted);">Last Updated: <span id="last-updated-time" class="tech-mono">--:--:--</span></span>
+                    <span class="header-datetime" id="live-datetime">--</span>
+                    <button class="btn-refresh" id="btn-refresh-dashboard" title="Refresh Dashboard Data">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 8H18.25" />
+                        </svg>
+                        Refresh
+                    </button>
+                </div>
+            </header>
+
+            <!-- KPI Cards Row -->
+            <section class="dashboard-stats">
+                <!-- System Health Score -->
+                <div class="stat-card resolved health-score">
+                    <div class="stat-header">
+                        <span class="stat-label">System Health</span>
+                    </div>
+                    <h3 class="stat-value">{{ stats.health_score }}%</h3>
+                    <div class="stat-footer">Resolved issues ratio</div>
+                </div>
+                <!-- MTTR Card -->
+                <div class="stat-card total mttr">
+                    <div class="stat-header">
+                        <span class="stat-label">MTTR</span>
+                    </div>
+                    <h3 class="stat-value">{{ stats.mttr }}</h3>
+                    <div class="stat-footer">Mean Time to Repair</div>
+                </div>
+                <!-- Total Records -->
+                <div class="stat-card total">
+                    <div class="stat-header">
+                        <span class="stat-label">Total Records</span>
+                        <span class="stat-trend trend-up">
+                            <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                            </svg>
+                            +8%
+                        </span>
+                    </div>
+                    <h3 class="stat-value">{{ stats.total }}</h3>
+                    <div class="stat-footer">vs last week</div>
+                </div>
+                <!-- Open Issues -->
+                <div class="stat-card open">
+                    <div class="stat-header">
+                        <span class="stat-label">Open Issues</span>
+                        <span class="stat-trend trend-down">
+                            <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 13l-7 7-7-7m14-6l-7 7-7-7" />
+                            </svg>
+                            -4%
+                        </span>
+                    </div>
+                    <h3 class="stat-value">{{ stats.open }}</h3>
+                    <div class="stat-footer">vs last week</div>
+                </div>
+                <!-- In Progress -->
+                <div class="stat-card in-progress">
+                    <div class="stat-header">
+                        <span class="stat-label">In Progress</span>
+                        <span class="stat-trend trend-up">
+                            <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                            </svg>
+                            +12%
+                        </span>
+                    </div>
+                    <h3 class="stat-value">{{ stats.in_progress }}</h3>
+                    <div class="stat-footer">vs last week</div>
+                </div>
+                <!-- Resolved -->
+                <div class="stat-card resolved">
+                    <div class="stat-header">
+                        <span class="stat-label">Resolved</span>
+                        <span class="stat-trend trend-up">
+                            <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                            </svg>
+                            +15%
+                        </span>
+                    </div>
+                    <h3 class="stat-value">{{ stats.resolved }}</h3>
+                    <div class="stat-footer">vs last week</div>
+                </div>
+                <!-- Critical Faults -->
+                <div class="stat-card critical">
+                    <div class="stat-header">
+                        <span class="stat-label">Critical Faults</span>
+                        <span class="stat-trend trend-down">
+                            <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 13l-7 7-7-7m14-6l-7 7-7-7" />
+                            </svg>
+                            -25%
+                        </span>
+                    </div>
+                    <h3 class="stat-value">{{ stats.critical }}</h3>
+                    <div class="stat-footer">vs last week</div>
+                </div>
+            </section>
+
+            <!-- Dashboard Analytics Grid (Visual Chart Placeholders) -->
+            <section class="dashboard-grid">
+                             <!-- Chart 1 (Status Distribution Bar Chart) -->
+                <div class="chart-card">
+                    <h4 class="chart-title">Status Distribution</h4>
+                    <div class="chart-container">
+                        <canvas id="statusChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 2 (Severity Analysis Donut Chart) -->
+                <div class="chart-card">
+                    <h4 class="chart-title">Severity Analysis</h4>
+                    <div class="chart-container">
+                        <canvas id="severityChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Historical Logs Table Section -->
+                <div class="logs-section">
+                    <div class="logs-header">
+                        <h4 class="logs-title">Maintenance Activity Logs</h4>
+                    </div>
+
+                    <div class="table-controls">
+                        <div class="search-box">
+                            <span class="search-icon">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                            </span>
+                            <input type="text" id="table-search" placeholder="Search logs (ID, name, description, technician)...">
+                        </div>
+                        <div class="filter-group">
+                            <div class="filter-control">
+                                <label for="filter-status">Status</label>
+                                <select id="filter-status">
+                                    <option value="All">All Statuses</option>
+                                    <option value="Open">Open</option>
+                                    <option value="In Progress">In Progress</option>
+                                    <option value="Resolved">Resolved</option>
+                                </select>
+                            </div>
+                            <div class="filter-control">
+                                <label for="filter-severity">Severity</label>
+                                <select id="filter-severity">
+                                    <option value="All">All Severities</option>
+                                    <option value="Low">Low</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="High">High</option>
+                                    <option value="Critical">Critical</option>
+                                </select>
+                            </div>
+                            <button id="btn-export" class="btn-secondary" title="Export All to CSV">
+                                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                </svg>
+                                Export CSV
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        {% if records %}
+                            <table class="records-table">
+                                <thead>
+                                    <tr>
+                                        <th>Equipment</th>
+                                        <th>Type</th>
+                                        <th>Location/Zone</th>
+                                        <th>Priority</th>
+                                        <th>Severity</th>
+                                        <th>Issue Description</th>
+                                        <th>Technician</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for row in records %}
+                                        <tr class="log-row" data-status="{{ row.status }}" data-severity="{{ row.severity }}" data-priority="{{ row.priority }}">
+                                            <td style="font-weight: 500;">
+                                                <span style="color: var(--accent); font-family: 'Roboto Mono', monospace;">{{ row.equipment_id }}</span>
+                                                <div style="font-size: 0.8rem; color: var(--text-muted);">{{ row.equipment_name }}</div>
+                                            </td>
+                                            <td>{{ row.equipment_type }}</td>
+                                            <td class="monospace-val" style="font-size: 0.8rem; color: var(--text-muted);">{{ row.location }}</td>
+                                            <td>
+                                                {% if row.priority == 'P1-Critical' %}
+                                                    <span class="badge" style="color: var(--color-critical); border-color: rgba(220, 38, 38, 0.2); background-color: rgba(220, 38, 38, 0.05);">P1</span>
+                                                {% elif row.priority == 'P2-High' %}
+                                                    <span class="badge" style="color: var(--color-warning); border-color: rgba(245, 158, 11, 0.2); background-color: rgba(245, 158, 11, 0.05);">P2</span>
+                                                {% elif row.priority == 'P3-Medium' %}
+                                                    <span class="badge" style="color: var(--color-info); border-color: rgba(0, 85, 204, 0.2); background-color: rgba(0, 85, 204, 0.05);">P3</span>
+                                                {% else %}
+                                                    <span class="badge" style="color: var(--text-muted); border-color: var(--border-color); background-color: var(--bg-panel-hover);">P4</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if row.severity == 'Low' %}
+                                                    <span class="badge badge-low">Low</span>
+                                                {% elif row.severity == 'Medium' %}
+                                                    <span class="badge badge-medium">Medium</span>
+                                                {% elif row.severity == 'High' %}
+                                                    <span class="badge badge-high">High</span>
+                                                {% elif row.severity == 'Critical' %}
+                                                    <span class="badge badge-critical">Critical</span>
+                                                {% else %}
+                                                    <span class="badge">{{ row.severity }}</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <div class="desc-text" title="{{ row.issue_description }}">{{ row.issue_description }}</div>
+                                            </td>
+                                            <td>{{ row.technician_name }}</td>
+                                            <td style="white-space: nowrap; font-family: 'Roboto Mono', monospace;">{{ row.date }}</td>
+                                            <td>
+                                                {% if row.status == 'Open' %}
+                                                    <span class="badge badge-open">Open</span>
+                                                {% elif row.status == 'In Progress' %}
+                                                    <span class="badge badge-progress">In Progress</span>
+                                                {% elif row.status == 'Resolved' %}
+                                                    <span class="badge badge-resolved">Resolved</span>
+                                                {% else %}
+                                                    <span class="badge">{{ row.status }}</span>
+                                                {% endif %}
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <button class="btn-delete" data-index="{{ row.original_index }}" title="Delete Record">
+                                                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    <tr id="no-matches-row" style="display: none;">
+                                        <td colspan="10" style="text-align: center; color: var(--text-muted); padding: 3rem; font-style: italic;">
+                                            No matching records found.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <div class="empty-state">
+                                <div class="empty-state-icon">🗂️</div>
+                                <h5>No Records Found</h5>
+                                <p style="margin-top: 0.5rem; font-size: 0.85rem;">Use the <a href="{{ url_for('index') }}" style="color: var(--accent); text-decoration: underline;">logging station</a> to report the first maintenance issue.</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </section>
+        </main>
+    </div>
+
+    <!-- Client-side JS -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

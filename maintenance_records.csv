@@ -1,0 +1,11 @@
+equipment_id,equipment_name,equipment_type,issue_description,severity,technician_name,date,status,priority,location,est_repair_time
+EQ-PL-001,ASML Twinscan Align B,Photolithography Machine,Critical alignment failure on lens module during calibration phase. Required field service engineer dispatch.,Critical,Alex Carter,6/5/2026,Open,P1-Critical,Clean Room A,More than 2 days
+EQ-CVD-002,Applied Materials CVD 12,Chemical Vapor Deposition (CVD) Chamber,Mass flow controller sensor mismatch causing deposition thickness deviations. MFC replaced.,High,Sarah Jenkins,6/7/2026,In Progress,P2-High,Clean Room B,4-8 hours
+EQ-WIS-003,KLA Tencor Wafer Inspect,Wafer Inspection System,Camera calibration drift on laser lens unit. Realigned and recalibrated.,Medium,Marcus Miller,6/8/2026,Resolved,P3-Medium,Clean Room A,1-4 hours
+EQ-ROB-004,Fanuc Cleanroom Arm,Industrial Robot Arm,Overcurrent fault on joint 3 motor. Cleared debris and checked cabling.,High,John Doe,6/10/2026,In Progress,P2-High,Fab Floor 2,1-4 hours
+EQ-CNC-005,Haas VF-2 Spindle,CNC Milling Machine,Spindle vibration exceeded warning threshold. Tightened mounts.,Low,Marcus Miller,6/11/2026,Resolved,P4-Low,Maintenance Bay,Less than 1 hour
+EQ-CT-006,Marley Cooling Tower B,Cooling Tower,Cooling water pump motor failed to start due to contactor damage. Replacement ordered.,Critical,Alex Carter,6/2/2026,Open,P1-Critical,Utility Room,1-2 days
+EQ-XFMR-007,Substation Transformer 2,High Voltage Transformer,Transformer core temperature exceeded safe limit. Oil pump service initiated.,High,Sarah Jenkins,6/12/2026,In Progress,P2-High,Utility Room,4-8 hours
+EQ-CAS-008,Atlas Copco Compressor,Compressed Air System,Pressure drop in cleanroom delivery line. Located and patched main line leaks.,Medium,John Doe,6/13/2026,Open,P3-Medium,Maintenance Bay,1-4 hours
+EQ-ETC-010,Lam Research Etcher,Etching System,Chamber chemistry ratio deviation during silicon etch. Re-calibrated mass flow controllers.,High,Sarah Jenkins,6/15/2026,Open,P2-High,Clean Room B,4-8 hours
+EQ-HVAC-009,Clean Room HVAC AHU-4,Clean Room HVAC,HEPA filter differential pressure high and filter change performed.,Low,Marcus Miller,6/14/2026,Resolved,P4-Low,Clean Room A,1-4 hours

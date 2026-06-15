@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexOps - Log Issue</title>
+    <!-- Favicon placeholder or styling -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚙️</text></svg>">
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <header class="top-navbar">
+        <div class="navbar-left">
+            <button id="sidebar-toggle" class="btn-hamburger" title="Toggle Sidebar">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+            <div class="logo-brand-area">
+                <span class="logo-text">NexOps</span>
+                <span class="logo-version">v3.0</span>
+            </div>
+        </div>
+        <div class="navbar-right">
+            <div class="user-profile">
+                <span class="user-name">Marcus Miller</span>
+                <div class="user-avatar">MM</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="app-body">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <nav class="nav-menu">
+                <li class="nav-item">
+                    <a href="{{ url_for('dashboard') }}">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z" />
+                        </svg>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a href="{{ url_for('index') }}">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        Log Issue
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('reports') }}">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        Reports
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('equipment_list') }}">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                        </svg>
+                        Equipment List
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('settings') }}">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                            <circle cx="12" cy="12" r="3" />
+                        </svg>
+                        Settings
+                    </a>
+                </li>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="system-status">
+                    <span class="status-dot"></span>
+                    <span>Factory Node: TX-H1</span>
+                </div>
+                <div>Server Time: <span id="server-time-clock">--:--:--</span></div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Alert Container for Flask Flash Messages -->
+            <div class="alert-container" id="alert-container">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                <span>{{ message }}</span>
+                                <button class="alert-close" onclick="this.parentElement.remove()">&times;</button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+
+            <!-- Breadcrumbs -->
+            <div class="breadcrumbs">
+                <a href="{{ url_for('dashboard') }}">Home</a>
+                <span class="separator">/</span>
+                <span class="current">Log Issue</span>
+            </div>
+
+            <!-- Page Header -->
+            <header class="page-header">
+                <div>
+                    <h2 class="page-title">Issue Logging Station</h2>
+                    <p class="page-description">Technician portal to log active equipment failures and safety hazards.</p>
+                </div>
+                <div class="header-actions">
+                    <span class="header-datetime" id="live-datetime">--</span>
+                </div>
+            </header>
+
+            <!-- Form Card Section -->
+            <section class="form-card">
+                <form action="{{ url_for('submit') }}" method="POST" id="maintenance-form">
+                    <div class="form-grid">
+                        
+                        <!-- Equipment ID -->
+                        <div class="form-group">
+                            <label for="equipment_id">Equipment ID</label>
+                            <input type="text" id="equipment_id" name="equipment_id" required placeholder="e.g. EQ-832" autocomplete="off">
+                        </div>
+
+                        <!-- Equipment Name -->
+                        <div class="form-group">
+                            <label for="equipment_name">Equipment Name</label>
+                            <input type="text" id="equipment_name" name="equipment_name" required placeholder="e.g. Main Intake Valve B" autocomplete="off">
+                        </div>
+
+                        <!-- Equipment Type -->
+                        <div class="form-group">
+                            <label for="equipment_type">Equipment Type</label>
+                            <select id="equipment_type" name="equipment_type" required>
+                                <option value="" disabled selected>Select equipment type</option>
+                                {% for type in equipment_types %}
+                                    <option value="{{ type }}">{{ type }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <!-- Severity Level -->
+                        <div class="form-group">
+                            <label for="severity">Severity Level</label>
+                            <select id="severity" name="severity" required>
+                                <option value="" disabled selected>Select severity</option>
+                                {% for level in severity_levels %}
+                                    <option value="{{ level }}">{{ level }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <!-- Priority Level -->
+                        <div class="form-group">
+                            <label for="priority">Priority Level</label>
+                            <select id="priority" name="priority" required>
+                                <option value="" disabled selected>Select priority</option>
+                                <option value="P1-Critical">P1-Critical</option>
+                                <option value="P2-High">P2-High</option>
+                                <option value="P3-Medium">P3-Medium</option>
+                                <option value="P4-Low">P4-Low</option>
+                            </select>
+                        </div>
+
+                        <!-- Location/Zone -->
+                        <div class="form-group">
+                            <label for="location">Location / Zone</label>
+                            <select id="location" name="location" required>
+                                <option value="" disabled selected>Select location / zone</option>
+                                <option value="Clean Room A">Clean Room A</option>
+                                <option value="Clean Room B">Clean Room B</option>
+                                <option value="Fab Floor 1">Fab Floor 1</option>
+                                <option value="Fab Floor 2">Fab Floor 2</option>
+                                <option value="Utility Room">Utility Room</option>
+                                <option value="Maintenance Bay">Maintenance Bay</option>
+                            </select>
+                        </div>
+
+                        <!-- Estimated Repair Time -->
+                        <div class="form-group">
+                            <label for="est_repair_time">Estimated Repair Time</label>
+                            <select id="est_repair_time" name="est_repair_time" required>
+                                <option value="" disabled selected>Select estimated repair time</option>
+                                <option value="Less than 1 hour">Less than 1 hour</option>
+                                <option value="1-4 hours">1-4 hours</option>
+                                <option value="4-8 hours">4-8 hours</option>
+                                <option value="1-2 days">1-2 days</option>
+                                <option value="More than 2 days">More than 2 days</option>
+                            </select>
+                        </div>
+
+                        <!-- Status Dropdown -->
+                        <div class="form-group">
+                            <label for="status">Initial Status</label>
+                            <select id="status" name="status" required>
+                                {% for s in statuses %}
+                                    <option value="{{ s }}" {% if s == 'Open' %}selected{% endif %}>{{ s }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <!-- Technician Name -->
+                        <div class="form-group">
+                            <label for="technician_name">Technician Name</label>
+                            <input type="text" id="technician_name" name="technician_name" required placeholder="e.g. Marcus Miller" autocomplete="off">
+                        </div>
+
+                        <!-- Date Picker -->
+                        <div class="form-group">
+                            <label for="date">Date Identified</label>
+                            <input type="date" id="date" name="date" required>
+                        </div>
+
+                        <!-- Issue Description -->
+                        <div class="form-group full-width">
+                            <label for="issue_description">Issue Description</label>
+                            <textarea id="issue_description" name="issue_description" required placeholder="Provide a detailed description of the fault, failure codes, and any immediate safety actions taken..."></textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit">Submit Record</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <!-- Client-side JS -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
